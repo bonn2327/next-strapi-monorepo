@@ -4,8 +4,8 @@ import { useToken } from "./useToken";
 export const useDeleteTask = () => {
   const userToken = useToken();
 
-  const deleteTask = async (id: string) => {
-    const response = await fetch(`/api/tasks/${id}`, {
+  const deleteTask = async (documentId: string) => {
+    const response = await fetch(`/api/tasks/${documentId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${userToken}`,

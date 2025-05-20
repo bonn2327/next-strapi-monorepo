@@ -10,10 +10,8 @@ export const TasksList = () => {
   const { data: tasksList } = useGetTasks();
   const deleteTaskMutation = useDeleteTask();
 
-  console.log(tasksList);
-
-  const handleDeleteTask = (id: string) => {
-    deleteTaskMutation.mutate(id, {
+  const handleDeleteTask = (documentId: string) => {
+    deleteTaskMutation.mutate(documentId, {
       onSuccess: () => {
         toast.success("Task deleted");
         queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -34,7 +32,7 @@ export const TasksList = () => {
         >
           {task.text}
           <button
-            onClick={() => handleDeleteTask(task.id.toString())}
+            onClick={() => handleDeleteTask(task.documentId)}
             className="absolute top-2 right-2 cursor-pointer p-2 bg-red-200 text-red-700 rounded-md"
             title="Delete task"
           >

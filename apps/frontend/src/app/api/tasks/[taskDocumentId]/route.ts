@@ -4,10 +4,11 @@ import { headers } from "next/headers";
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ taskId: string }> }
+  { params }: { params: Promise<{ taskDocumentId: string }> }
 ) {
   try {
-    const taskId = (await params).taskId;
+    const taskDocumentId = (await params).taskDocumentId;
+
     const headersList = await headers();
     const token = headersList.get("Authorization")?.split(" ")[1];
 
@@ -25,15 +26,17 @@ export async function DELETE(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    console.log(taskId);
-    const response = await fetch(process.env.BACKEND_URL + "/tasks/" + taskId, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      process.env.BACKEND_URL + "/tasks/" + taskDocumentId,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-    return NextResponse.json(response);
+    return NextResponse.json(response?.status === 204);
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
