@@ -12,7 +12,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const existingToken = window.localStorage.getItem("token");
+  const existingToken = window?.localStorage.getItem("token") ?? "";
   const [userToken, setUserToken] = useState<string | null>(
     existingToken || null
   );
