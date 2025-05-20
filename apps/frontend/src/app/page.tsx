@@ -38,7 +38,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container min-h-screen mx-auto px-4 py-8">
         {!userToken ? (
           <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-12">
             <div className="p-8">
