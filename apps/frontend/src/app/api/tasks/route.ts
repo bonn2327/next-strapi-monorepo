@@ -36,6 +36,8 @@ export async function GET(request: NextRequest) {
 
     searchParams.append("populate", "*");
 
+    searchParams.append("sort", "createdAt:desc");
+
     const result = await fetch(`${baseUrl}?${searchParams.toString()}`, {
       method: "GET",
       headers: {
