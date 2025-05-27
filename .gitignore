@@ -4,3 +4,5 @@ tmp/
 .next/
 .strapi/
 .tmp/
+docker/data/
+bun.lockb
