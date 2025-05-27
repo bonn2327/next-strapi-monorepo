@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
     });
 
     const result = await response.json();
-    console.log(result);
 
     return Response.json(result as UserAccessResponse, { status: 200 });
   } catch (error) {
