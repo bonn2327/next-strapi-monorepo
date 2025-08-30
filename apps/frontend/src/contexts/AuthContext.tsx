@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export type AuthContextType = {
   userToken: string | null;
@@ -12,10 +12,16 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const existingToken = window?.localStorage.getItem("token") ?? "";
-  const [userToken, setUserToken] = useState<string | null>(
-    existingToken || null
-  );
+  const [userToken, setUserToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const existingToken = window.localStorage.getItem("token") ?? "";
+      setUserToken(existingToken || null);
+    }
+
+  }, []);
+
 
   return (
     <AuthContext.Provider value={{ userToken, setUserToken }}>

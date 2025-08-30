@@ -1,6 +1,4 @@
 # Use postgres/example user/password credentials
-version: "3.1"
-
 services:
   db:
     image: bitnami/postgresql:latest
@@ -11,7 +9,7 @@ services:
     networks:
       - pgnetwork
     volumes:
-      - "./data:/bitnami/postgresql"
+      - postgres_data:/bitnami/postgresql
     ports:
       - 5432:5432
 
@@ -25,6 +23,9 @@ services:
       - 27018:80
     networks:
       - pgnetwork
+
+volumes:
+  postgres_data:
 
 networks:
   pgnetwork:
