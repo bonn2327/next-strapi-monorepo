@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/libs/queryClient";
-import { ToastContainer } from "react-toastify";
 import { PageWrapperClient } from "./pageWrapperClient";
 
 const geistSans = Geist({
@@ -31,12 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <PageWrapperClient>
-          <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <PageWrapperClient>
             {children}
-            <ToastContainer />
-          </QueryClientProvider>
-        </PageWrapperClient>
+          </PageWrapperClient>
+        </QueryClientProvider>
       </body>
     </html>
   );

@@ -1,10 +1,10 @@
 "use client";
-import { AuthProvider } from "@/contexts/AuthContext";
+import CombinedAuthProvider from '@/libs/SessionProvider'
 
 export const PageWrapperClient = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return <CombinedAuthProvider>{children}</CombinedAuthProvider>;
 };

@@ -1,11 +1,12 @@
 "use client";
-import { useSetToken } from "@/hooks/useSetToken";
+import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { toast } from "react-toastify";
+
+import { signOut } from "next-auth/react";
 
 export default function LogoutPage() {
-  const setToken = useSetToken();
+  const { setToken } = useAuth();
   const router = useRouter();
   const hasLoggedOut = useRef(false);
 
@@ -13,9 +14,14 @@ export default function LogoutPage() {
     if (hasLoggedOut.current) return;
     hasLoggedOut.current = true;
     
-    setToken(null);
-    toast.success("Disconnected");
-    router.push("/");
+    const logout = async () => {
+      setToken(null);
+      await signOut({ redirect: false });
+
+      router.push("/");
+    };
+    
+    logout();
   }, []);
 
   return (
